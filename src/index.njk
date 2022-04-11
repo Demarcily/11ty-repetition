@@ -3,3 +3,41 @@ layout: base.njk
 title: Hello World
 ---
 
+{{ github | dump }}
+
+<h1> {{ github.login }} </h1>
+<img src="{{ github.avatar_url}}" alt="{{github.login}}">
+
+<h2> Repositories </h2>
+<div id = "repos">
+  <button> Fetch </button>
+  <div class="spinner-border d-none" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+
+
+
+
+
+
+<script>
+  const button = document.querySelector('#repos > button');
+  const spinner = document.querySelector('#repos > .spinner-border');
+  button.addEventListener('click', (e) => {
+    spinner.classList.toggle('d-none');
+    fetch('https://api.github.com/users/Demarcily/repos')
+      .then(response => response.json())
+      .then(data => {
+        spinner.classList.toggle('d-none');
+        const repos = document.querySelector('#repos');
+        data.forEach(repo => {
+          const p = document.createElement('p');
+          p.textContent = repo.name;
+          repos.appendChild(p);
+        });
+      });
+    });
+
+</script>
