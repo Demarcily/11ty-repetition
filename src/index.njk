@@ -2,8 +2,8 @@
 layout: base.njk
 title: Hello World
 ---
-
 {{ github | dump }}
+{{ herokue | dump }}
 
 <h1> {{ github.login }} </h1>
 <img src="{{ github.avatar_url}}" alt="{{github.login}}">
@@ -39,5 +39,4 @@ title: Hello World
         });
       });
     });
-
 </script>
